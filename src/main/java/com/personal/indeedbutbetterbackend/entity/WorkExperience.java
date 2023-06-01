@@ -38,7 +38,7 @@ public class WorkExperience {
     @Column(name="description")
     private String description;
 
-    /*@ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
     @JoinColumn(name="user_fk")
-    private User user;*/
+    private User user;
 }

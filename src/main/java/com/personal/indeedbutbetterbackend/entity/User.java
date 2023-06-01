@@ -33,4 +33,10 @@ public class User {
     @Column(name="user_type")
     private String userType;
 
+    public User(String email, String name) {
+        super();
+        this.email = email;
+        this.name = name;
+    }
+
 }

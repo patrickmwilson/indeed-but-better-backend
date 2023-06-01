@@ -1,5 +1,6 @@
 package com.personal.indeedbutbetterbackend.service;
 
+import com.personal.indeedbutbetterbackend.auth.GoogleAuth;
 import com.personal.indeedbutbetterbackend.entity.User;
 import com.personal.indeedbutbetterbackend.repository.UserDao;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,21 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    public User validateUserSignInWithGoogle(String idToken) {
+        try {
+            GoogleAuth googleAuth = new GoogleAuth();
+            User user = googleAuth.validateUser(idToken);
+            if(this.findByEmail(user.getEmail()) == null) {
+                this.insert(user);
+            }
+            System.out.println(user.toString());
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public User findByEmail(String email) {
         return this.userDao.findUserByEmail(email);

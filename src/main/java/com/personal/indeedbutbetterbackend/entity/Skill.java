@@ -21,11 +21,11 @@ public class Skill {
     @Column(name="skill_name")
     private String skillName;
 
-    /*@ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id", nullable = false)
-    private User user;*/
+    private User user;
 
-    /*@ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="job_listing_id", nullable = false)
-    private JobListing jobListing;*/
+    private JobListing jobListing;
 }
