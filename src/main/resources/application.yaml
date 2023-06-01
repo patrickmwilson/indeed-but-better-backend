@@ -17,6 +17,16 @@ spring:
     username: indeeduser
     password: password
     driver-class-name: org.mariadb.jdbc.Driver
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 583369200281-ubok9tafv7bf6rm259jhklq30clh2fbs.apps.googleusercontent.com
+            clientSecret: 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
+            scope:
+              - email
+              - profile
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
