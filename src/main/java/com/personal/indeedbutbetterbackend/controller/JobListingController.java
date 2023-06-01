@@ -2,12 +2,14 @@ package com.personal.indeedbutbetterbackend.controller;
 
 import com.personal.indeedbutbetterbackend.entity.JobListing;
 import com.personal.indeedbutbetterbackend.service.JobListingService;
+import com.personal.indeedbutbetterbackend.validator.JobListingValidator;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -21,8 +23,12 @@ import java.util.List;
 @NoArgsConstructor
 public class JobListingController {
 
-
     private JobListingService jobListingService;
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.setValidator(new JobListingValidator());
+    }
 
     @GetMapping("/all")
     public ResponseEntity<List<JobListing>> getAll() {

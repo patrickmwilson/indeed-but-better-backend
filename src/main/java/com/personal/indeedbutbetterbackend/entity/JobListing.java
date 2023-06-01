@@ -4,6 +4,8 @@ import lombok.*;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -30,4 +32,5 @@ public class JobListing {
 
     @Column(name="location")
     private String location;
+
 }
