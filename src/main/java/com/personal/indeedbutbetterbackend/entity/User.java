@@ -33,10 +33,14 @@ public class User {
     @Column(name="user_type")
     private String userType;
 
-    public User(String email, String name) {
+    @Column(name="user_picture")
+    private String userPicture;
+
+    public User(String email, String name, String userPicture) {
         super();
         this.email = email;
         this.name = name;
+        this.userPicture = userPicture;
     }
 
 }
