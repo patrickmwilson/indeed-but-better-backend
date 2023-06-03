@@ -24,6 +24,12 @@ public class User {
     @Column(name="name")
     private String name;
 
+    @Column(name="first_name")
+    private String firstName;
+
+    @Column(name="last_name")
+    private String lastName;
+
     @Column(name="email",nullable=false,unique=true)
     private String email;
 
@@ -36,10 +42,12 @@ public class User {
     @Column(name="user_picture")
     private String userPicture;
 
-    public User(String email, String name, String userPicture) {
+    public User(String email, String name, String firstName, String lastName, String userPicture) {
         super();
         this.email = email;
         this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.userPicture = userPicture;
     }
 

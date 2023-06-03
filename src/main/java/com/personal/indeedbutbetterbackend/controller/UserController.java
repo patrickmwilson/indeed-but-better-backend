@@ -32,6 +32,7 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
+    //NOT IN USER, ALL AUTH HANDLED THROUGH GOOGLE
     @PostMapping("/create")
     public ResponseEntity<String> insertUser(@RequestBody @Valid User user, BindingResult result) {
         System.out.println("In create user");
@@ -42,6 +43,18 @@ public class UserController {
         }
         this.userService.insert(user);
         return new ResponseEntity<>("Resource created", HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @PostMapping("/update")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        System.out.println("In update user");
+        System.out.println(user.toString());
+        /*if(result.hasErrors()) {
+            return new ResponseEntity<>(result.getFieldError().getCode() + " " + result.getFieldError().getDefaultMessage(), HttpStatus.NOT_ACCEPTABLE);
+        }*/
+        userService.update(user);
+        return new ResponseEntity<>("Successfully updated", HttpStatus.OK);
     }
 
     @GetMapping("/all")

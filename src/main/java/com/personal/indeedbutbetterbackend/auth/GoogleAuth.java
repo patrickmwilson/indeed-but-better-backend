@@ -32,8 +32,7 @@ public class GoogleAuth {
             GoogleIdToken idToken = verifier.verify(idTokenString);
             if (idToken != null) {
                 Payload payload = idToken.getPayload();
-                User user = new User(payload.getEmail(), (String) payload.get("name"), (String) payload.get("picture"));
-                return user;
+                return new User(payload.getEmail(), (String) payload.get("name"), (String) payload.get("given_name"), (String) payload.get("family_name"), (String) payload.get("picture"));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,6 +27,7 @@ dependencies {
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'javax.validation:validation-api'
 	implementation 'javax.validation:validation-api:2.0.1.Final'
+	implementation 'com.h2database:h2:1.4.200'
 	implementation 'mysql:mysql-connector-java:8.0.28'
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
 	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
