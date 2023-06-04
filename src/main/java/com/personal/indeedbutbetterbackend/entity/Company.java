@@ -16,7 +16,7 @@ public class Company {
     @Column(name="company_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private int companyId;
+    private int id;
 
     @Column(name="name", nullable = false,unique = true)
     private String name;

@@ -25,4 +25,8 @@ public class CompanyService {
         companyDao.save(company);
     }
 
+    public Company findByCompanyId(int id) {
+        return this.companyDao.findById(id);
+    }
+
 }

@@ -25,4 +25,6 @@ public class JobListingService {
         jobListingDao.save(jobListing);
     }
 
+    public List<JobListing> getJobListingsByCompanyId(int companyId) { return this.jobListingDao.findJobListingsByCompanyId(companyId); }
+
 }
