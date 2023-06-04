@@ -1,10 +1,12 @@
 package com.personal.indeedbutbetterbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.List;
 
 @Getter
 @Setter
@@ -32,5 +34,11 @@ public class JobListing {
 
     @Column(name="location")
     private String location;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
 
 }

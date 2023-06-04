@@ -21,10 +21,6 @@ public class JobListingService {
         return this.jobListingDao.findAll();
     }
 
-    public JobListing findByJobListingId(int jobListingId) {
-        return jobListingDao.findByJobListingId(jobListingId);
-    }
-
     public void insert(JobListing jobListing) {
         jobListingDao.save(jobListing);
     }
