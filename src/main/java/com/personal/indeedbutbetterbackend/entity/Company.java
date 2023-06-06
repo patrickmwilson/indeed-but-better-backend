@@ -16,9 +16,17 @@ public class Company {
     @Column(name="company_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private int companyId;
+    private int id;
 
-    @Column(name="name",nullable = false,unique = true)
-    private String companyName;
+    @Column(name="name", nullable = false,unique = true)
+    private String name;
 
+    @Column(name="size")
+    private String size;
+
+    @Column(name="industry")
+    private String industry;
+
+    @Column(name="location", nullable = false)
+    private String location;
 }

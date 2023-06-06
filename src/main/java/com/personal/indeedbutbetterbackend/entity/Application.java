@@ -14,37 +14,29 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name="Job_Listing")
-public class JobListing {
+@Table(name="Application")
+public class Application {
 
     @Id
-    @Column(name="job_listing_id")
+    @Column(name="application_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private int jobListingId;
+    private int id;
 
-    @Column(name="job_title",nullable=false)
-    private String jobTitle;
+    @Column(name="name")
+    private String name;
 
-    @Column(name="description")
-    private String description;
-
-    @Column(name="salary")
-    private double salary;
-
-    @Column(name="location")
-    private String location;
+    @Column(name="notes")
+    private String notes;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private User user;
+    private User applicant;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "job-listing-id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Company company;
+    private JobListing jobListing;
 
 }
