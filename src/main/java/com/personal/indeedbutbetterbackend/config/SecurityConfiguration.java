@@ -19,9 +19,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
     private JwtTokenFilter jwtTokenFilter;
 
     @Bean

@@ -41,7 +41,7 @@ public class UserService {
         oldUserRecord.setPhoneNumber(user.getPhoneNumber());
         oldUserRecord.setUserType(user.getUserType());
 
-        System.out.println("In service update");
+        System.out.println("In user service update");
         System.out.println(oldUserRecord.toString());
 
         userDao.save(oldUserRecord);

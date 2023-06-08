@@ -37,11 +37,6 @@ public class UserController {
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody User user) {
-        return new ResponseEntity<>(null,HttpStatus.OK);
-    }
-
     //NOT IN USER, ALL AUTH HANDLED THROUGH GOOGLE
     @PostMapping("/create")
     public ResponseEntity<String> insertUser(@RequestBody @Valid User user, BindingResult result) {
