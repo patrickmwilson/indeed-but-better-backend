@@ -42,6 +42,8 @@ public class User {
     @Column(name="user_picture")
     private String userPicture;
 
+    private String jwt;
+
     public User(String email, String name, String firstName, String lastName, String userPicture) {
         super();
         this.email = email;

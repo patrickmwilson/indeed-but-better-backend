@@ -1,6 +1,7 @@
 package com.personal.indeedbutbetterbackend.controller;
 
 import com.personal.indeedbutbetterbackend.entity.User;
+import com.personal.indeedbutbetterbackend.service.JwtService;
 import com.personal.indeedbutbetterbackend.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -23,13 +24,21 @@ public class UserController {
 
     private UserService userService;
 
-    //private String clientId = "583369200281-ubok9tafv7bf6rm259jhklq30clh2fbs.apps.googleusercontent.com";
+    private JwtService jwtService;
 
-    @CrossOrigin
     @PostMapping("/login-with-google")
     public ResponseEntity<User> login(@RequestBody String credential)  {
         User user = userService.validateUserSignInWithGoogle(credential);
+        if(user == null) {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        user.setJwt(jwtService.generateToken(user.getEmail()));
         return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     //NOT IN USER, ALL AUTH HANDLED THROUGH GOOGLE
