@@ -7,6 +7,7 @@ import com.personal.indeedbutbetterbackend.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,20 +24,20 @@ public class SkillController {
     @Autowired
     private SkillService skillService;
 
-    /*@Autowired
-    private JwtService jwtService;*/
-
     @Autowired
     private UserService userService;
 
+    @GetMapping("/find-by-user")
+    public ResponseEntity<List<Skill>> findByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
+       User user = userService.findByJwtToken(authHeader);
+       List<Skill> skillList = skillService.findByUser(user);
+       return new ResponseEntity<>(skillList, HttpStatus.OK);
+    }
 
-
-
-   /* @GetMapping("/find-by-user")
-    public ResponseEntity<List<Skill>> getSkillsByUser(@RequestBody String jwt) {
-        String userEmail = jwtService.extractEmail(jwt);
-        User user = userService.findByEmail(userEmail);
-        List<Skill> skillList = skillService.findByUser(user);
-        return new ResponseEntity<>(skillList, HttpStatus.OK);
-    }*/
+    @PostMapping("/add-to-user")
+    public ResponseEntity<String> addSkill(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @RequestBody Skill skill) {
+        User user = userService.findByJwtToken(authHeader);
+        skillService.saveToUser(skill, user);
+        return new ResponseEntity<>("Skill added", HttpStatus.OK);
+    }
 }

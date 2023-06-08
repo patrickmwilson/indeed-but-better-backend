@@ -22,7 +22,8 @@ public class SkillService {
         return skillDao.findByUser(user);
     }
 
-    public void create(Skill skill) {
+    public void saveToUser(Skill skill, User user) {
+        skill.setUser(user);
         skillDao.save(skill);
     }
 }

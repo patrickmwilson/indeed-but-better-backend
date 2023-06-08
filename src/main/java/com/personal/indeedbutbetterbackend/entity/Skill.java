@@ -24,13 +24,15 @@ public class Skill {
     @Column(name="skill_name")
     private String skillName;
 
-    @ManyToOne(fetch=FetchType.EAGER, optional=false)
-    @JoinColumn(name="user_id", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private User user;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="job_listing_id", nullable = false)
+    @JoinColumn(name="job_listing_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private JobListing jobListing;
 }
