@@ -22,6 +22,11 @@ spring:
     password: password
     driverClassName: org.h2.Driver
   security:
+    jwt:
+      secret: 5v8y/B?E(H+KbPeShVmYq3t6w9z$C&F)
+    user:
+      name: user
+      password: password
     oauth2:
       client:
         registration:
