@@ -1,7 +1,6 @@
 package com.personal.indeedbutbetterbackend.config;
 
 import com.personal.indeedbutbetterbackend.auth.JwtTokenFilter;
-import com.personal.indeedbutbetterbackend.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,11 +25,13 @@ public class SecurityConfiguration {
         return http
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/users/login-with-google").permitAll();
+                    //auth.anyRequest().permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(withDefaults())
+                .cors(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

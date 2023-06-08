@@ -50,7 +50,7 @@ public class JwtTokenUtil {
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
-                .setSubject(String.format("%s,%s",user.getUserId(), user.getEmail()))
+                .setSubject(user.getEmail())
                 .setIssuer("IndeedButBetter")
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE_DURATION))
