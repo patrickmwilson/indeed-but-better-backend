@@ -3,6 +3,7 @@ package com.personal.indeedbutbetterbackend.service;
 import com.personal.indeedbutbetterbackend.auth.GoogleAuth;
 import com.personal.indeedbutbetterbackend.entity.User;
 import com.personal.indeedbutbetterbackend.repository.UserDao;
+import com.personal.indeedbutbetterbackend.util.JwtTokenUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private JwtTokenUtil jwtUtil;
+
     public User validateUserSignInWithGoogle(String idToken) {
         try {
             GoogleAuth googleAuth = new GoogleAuth();
@@ -30,6 +34,12 @@ public class UserService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public User findByJwtToken(String authHeader) {
+        String token = authHeader.substring(7);
+        String email = jwtUtil.getSubject(token);
+        return this.findByEmail(email);
     }
 
     public void update(User user) {
