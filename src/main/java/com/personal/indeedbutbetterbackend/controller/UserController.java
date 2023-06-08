@@ -1,8 +1,8 @@
 package com.personal.indeedbutbetterbackend.controller;
 
 import com.personal.indeedbutbetterbackend.entity.User;
-import com.personal.indeedbutbetterbackend.service.JwtService;
 import com.personal.indeedbutbetterbackend.service.UserService;
+import com.personal.indeedbutbetterbackend.util.JwtTokenUtil;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class UserController {
 
     private UserService userService;
 
-    private JwtService jwtService;
+    private JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("/login-with-google")
     public ResponseEntity<User> login(@RequestBody String credential)  {
@@ -32,7 +32,8 @@ public class UserController {
         if(user == null) {
             return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
-        user.setJwt(jwtService.generateToken(user.getEmail()));
+        user.setJwt(jwtTokenUtil.generateAccessToken(user));
+        System.out.println(user.toString());
         return new ResponseEntity<>(user,HttpStatus.OK);
     }
 

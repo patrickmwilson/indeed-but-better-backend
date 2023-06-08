@@ -25,7 +25,6 @@ public class UserService {
             if(this.findByEmail(user.getEmail()) == null) {
                 this.insert(user);
             }
-            System.out.println(user.toString());
             return user;
         } catch (Exception e) {
             e.printStackTrace();
