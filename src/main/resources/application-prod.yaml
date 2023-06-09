@@ -13,19 +13,11 @@ management:
 
 spring:
   datasource:
-    #url: jdbc:mariadb://Ibbinstance.cjraovccfifn.us-west-1.rds.amazonaws.com:3306/ibbdb
-    #username: ibbuser
-    #password: password
-    #driver-class-name: org.mariadb.jdbc.Driver
-    #url: jdbc:h2:mem:mydb
-    url: jdbc:h2:file:/spring-boot-h2-db
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
-  h2:
-    console:
-      enabled: true
-      path: /h2
+    url: jdbc:mysql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
+    username: ${PROD_DB_USERNAME}
+    password: ${PROD_DB_PASSWORD}
+    driverClassName: com.mysql.jdbc.Driver
+    name: indeed-but-better
   security:
     jwt:
       secret: 5v8y/B?E(H+KbPeShVmYq3t6w9z$C&F)
@@ -42,11 +34,9 @@ spring:
               - email
               - profile
   jpa:
-    #database-platform: org.hibernate.dialect.MySQL8Dialect
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
     hibernate:
-      #ddl-auto: create-drop
       ddl-auto: update
   mail:
     host: smtp.gmail.com
