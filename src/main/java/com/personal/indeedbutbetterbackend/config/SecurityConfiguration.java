@@ -25,8 +25,8 @@ public class SecurityConfiguration {
         return http
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/users/login-with-google").permitAll();
-                    //auth.anyRequest().permitAll();
-                    auth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
+                    //auth.anyRequest().authenticated();
                 })
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
