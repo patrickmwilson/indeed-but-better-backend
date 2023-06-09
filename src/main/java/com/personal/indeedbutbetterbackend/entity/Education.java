@@ -1,7 +1,10 @@
 package com.personal.indeedbutbetterbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -27,13 +30,15 @@ public class Education {
     @Column(name="major_name",nullable = false)
     private String majorName;
 
-    @Column(name="gpa",nullable = false)
-    private Double gpa;
+    @Column(name="graduation_year")
+    private String graduationYear;
 
     @Column(name="description")
     private String description;
 
-    /*@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name="user_fk")
-    private User user;*/
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
 }

@@ -7,7 +7,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
-import com.personal.indeedbutbetterbackend.entity.User;
+
 
 
 import java.io.IOException;
@@ -17,22 +17,21 @@ import java.util.Collections;
 public class GoogleAuth {
 
     //@Value("${spring.security.oauth2.client.registration.google.clientId}")
-    private String clientId = "583369200281-ubok9tafv7bf6rm259jhklq30clh2fbs.apps.googleusercontent.com";
+    private String CLIENT_ID = "583369200281-ubok9tafv7bf6rm259jhklq30clh2fbs.apps.googleusercontent.com";
     private HttpTransport transport = GoogleNetHttpTransport.newTrustedTransport();
     private JsonFactory jsonFactory = GsonFactory.getDefaultInstance();
     GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-            .setAudience(Collections.singletonList(clientId))
+            .setAudience(Collections.singletonList(CLIENT_ID))
             .build();
 
     public GoogleAuth() throws GeneralSecurityException, IOException {
     }
 
-    public User validateUser(String idTokenString) {
+    public Payload validateUser(String idTokenString) {
         try {
             GoogleIdToken idToken = verifier.verify(idTokenString);
             if (idToken != null) {
-                Payload payload = idToken.getPayload();
-                return new User(payload.getEmail(), (String) payload.get("name"), (String) payload.get("given_name"), (String) payload.get("family_name"), (String) payload.get("picture"));
+                return idToken.getPayload();
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.personal.indeedbutbetterbackend.service;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.personal.indeedbutbetterbackend.auth.GoogleAuth;
 import com.personal.indeedbutbetterbackend.entity.User;
 import com.personal.indeedbutbetterbackend.repository.UserDao;
@@ -25,8 +26,10 @@ public class UserService {
     public User validateUserSignInWithGoogle(String idToken) {
         try {
             GoogleAuth googleAuth = new GoogleAuth();
-            User user = googleAuth.validateUser(idToken);
-            if(this.findByEmail(user.getEmail()) == null) {
+            GoogleIdToken.Payload payload = googleAuth.validateUser(idToken);
+            User user = this.findByEmail(payload.getEmail());
+            if(user == null) {
+                user = new User(payload.getEmail(), (String) payload.get("name"), (String) payload.get("given_name"), (String) payload.get("family_name"), (String) payload.get("picture"));
                 this.insert(user);
             }
             return user;
