@@ -5,6 +5,7 @@ import com.personal.indeedbutbetterbackend.service.CompanyService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,4 +39,11 @@ public class CompanyController {
         List<Company> companyList = companyService.search(query);
         return new ResponseEntity<>(companyList, HttpStatus.OK);
     }
+
+    @GetMapping("/page/{page}")
+    public ResponseEntity<Page<Company>> getPage(@PathVariable(value = "page") int page) {
+        Page<Company> companyPage = companyService.getAll(page);
+        return new ResponseEntity<>(companyPage, HttpStatus.OK);
+    }
+
 }
