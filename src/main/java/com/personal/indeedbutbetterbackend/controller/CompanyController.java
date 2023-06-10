@@ -34,10 +34,10 @@ public class CompanyController {
         return new ResponseEntity<>("Resource created", HttpStatus.CREATED);
     }
 
-    @GetMapping("/search/{query}")
-    public ResponseEntity<List<Company>> search(@PathVariable(value = "query") String query) {
-        List<Company> companyList = companyService.search(query);
-        return new ResponseEntity<>(companyList, HttpStatus.OK);
+    @GetMapping("/search/{query}/page/{page}")
+    public ResponseEntity<Page<Company>> search(@PathVariable(value = "query") String query, @PathVariable(value = "page") int page) {
+        Page<Company> companyPage = companyService.search(query, page);
+        return new ResponseEntity<>(companyPage, HttpStatus.OK);
     }
 
     @GetMapping("/page/{page}")

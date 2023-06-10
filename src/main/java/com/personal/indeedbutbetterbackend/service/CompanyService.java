@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,15 +39,10 @@ public class CompanyService {
         return this.companyDao.findById(id);
     }
 
-    public List<Company> search(String query){
-       var results = new ArrayList<Company>();
+    public Page<Company> search(String query, int page){
 
-        results.addAll(companyDao.findCompanyByNameContainsIgnoreCase(query));
-        results.addAll(companyDao.findCompanyByIndustryContainsIgnoreCase(query));
-        results.addAll(companyDao.findCompanyByAddress_CityContainsIgnoreCase(query));
-        results.addAll(companyDao.findCompanyByAddress_StateContainsIgnoreCase(query));
+        return companyDao.findCompanyByNameContainsOrIndustryContainsOrAddress_CityContainsOrAddress_StateContainsAllIgnoreCase(query, query, query, query, PageRequest.of(page, 10));
 
-        return results;
     }
 
     public Page<Company> getAll(int page) {return this.companyDao.findAll(PageRequest.of(page, 10));}
