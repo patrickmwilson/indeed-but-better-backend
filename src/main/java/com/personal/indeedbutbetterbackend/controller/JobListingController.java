@@ -59,10 +59,11 @@ public class JobListingController {
         return new ResponseEntity<>(jobListingPage, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<List<JobListing>> getJobListingsByUserId(@PathVariable(value = "userId") int userId) {
-        List<JobListing> jobListingList = jobListingService.getJobListingsByUserId(userId);
-        return new ResponseEntity<>(jobListingList, HttpStatus.OK);
+    @GetMapping("/page/{page}/user")
+    public ResponseEntity<Page<JobListing>> getJobListingsByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @PathVariable(value = "page") int page) {
+        User user = userService.findByJwtToken(authHeader);
+        Page<JobListing> jobListingPage = jobListingService.getJobListingsByUser(user.getUserId(), page);
+        return new ResponseEntity<>(jobListingPage, HttpStatus.OK);
     }
     @GetMapping("/page/{page}")
     public ResponseEntity<Page<JobListing>> getPage(@PathVariable(value = "page") int page) {
@@ -73,6 +74,13 @@ public class JobListingController {
     @GetMapping("/search/{query}/page/{page}")
     public ResponseEntity<Page<JobListing>> search(@PathVariable(value = "query") String query, @PathVariable(value = "page") int page) {
         Page<JobListing> jobPage = jobListingService.search(query, page);
+        return new ResponseEntity<>(jobPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{query}/page/{page}/user")
+    public ResponseEntity<Page<JobListing>> searchByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @PathVariable(value = "query") String query, @PathVariable(value = "page") int page) {
+        User user = userService.findByJwtToken(authHeader);
+        Page<JobListing> jobPage = jobListingService.searchbyUser(query, page, user.getUserId());
         return new ResponseEntity<>(jobPage, HttpStatus.OK);
     }
 

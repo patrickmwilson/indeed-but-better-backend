@@ -9,6 +9,7 @@ import com.personal.indeedbutbetterbackend.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,11 +50,11 @@ public class ApplicationController {
         return new ResponseEntity<>("Resource created", HttpStatus.CREATED);
     }
 
-    @GetMapping("/job-listings/{jobListingId}")
-    public ResponseEntity<List<Application>> getApplicationsByJobListingId(@PathVariable(value = "jobListingId") int jobListingId) {
-        List<Application> applications = applicationService.getApplicationsByJobListingId(jobListingId);
+    @GetMapping("/job-listings/{jobListingId}/page/{page}")
+    public ResponseEntity<Page<Application>> getApplicationsByJobListingId(@PathVariable(value = "jobListingId") int jobListingId, @PathVariable(value = "page") int page) {
+        Page<Application> applicationPage = applicationService.getApplicationsByJobListingId(jobListingId, page);
 
-        return new ResponseEntity<>(applications, HttpStatus.OK);
+        return new ResponseEntity<>(applicationPage, HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}")
@@ -62,4 +63,10 @@ public class ApplicationController {
 
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
+    @GetMapping("/job-listings/{jobListingId}/search/{query}/page/{page}")
+    public ResponseEntity<Page<Application>> searchByJobListingId(@PathVariable(value = "query") String query, @PathVariable(value = "page") int page, @PathVariable(value = "jobListingId") int jobListingId) {
+        Page<Application> applicationPage = applicationService.searchByJobListingId(query, page, jobListingId);
+        return new ResponseEntity<>(applicationPage, HttpStatus.OK);
+    }
+
 }

@@ -30,7 +30,7 @@ public class JobListingService {
     }
 
     public Page<JobListing> getJobListingsByCompanyId(int companyId, int page) { return this.jobListingDao.findJobListingsByCompanyId(companyId, PageRequest.of(page, 5)); }
-    public List<JobListing> getJobListingsByUserId(int userId) { return this.jobListingDao.findJobListingsByUserUserId(userId); }
+    public Page<JobListing> getJobListingsByUser(int userId, int page) { return this.jobListingDao.findJobListingsByUserUserId(userId, PageRequest.of(page, 5)); }
 
     public Page<JobListing> getAll(int page){
         return this.jobListingDao.findAll(PageRequest.of(page, 5));
@@ -38,8 +38,12 @@ public class JobListingService {
     public Page<JobListing> search(String query, int page){
 
         return jobListingDao.findJobListingsByJobTitleContainsOrDescriptionContainsOrCompany_NameContainsOrCompany_Address_CityContainsOrCompany_Address_StateContainsAllIgnoreCase(query, query, query, query, query, PageRequest.of(page, 5));
-
     }
+    public Page<JobListing> searchbyUser(String query, int page, int userId){
+
+        return jobListingDao.findJobListingsByJobTitleContainsOrDescriptionContainsOrCompany_NameContainsOrCompany_Address_CityContainsOrCompany_Address_StateContainsAndUserUserIdAllIgnoreCase(query, query, query, query, query, userId, PageRequest.of(page, 5));
+    }
+
 
 
 }
