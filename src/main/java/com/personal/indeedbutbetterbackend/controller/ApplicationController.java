@@ -9,6 +9,7 @@ import com.personal.indeedbutbetterbackend.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +37,10 @@ public class ApplicationController {
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
 
-    @PostMapping("/users/{userId}/job-listings/{jobListingId}/create")
-    public ResponseEntity<String> insertApplication(@PathVariable(value = "userId") int userId, @PathVariable(value = "jobListingId") int jobListingId, @RequestBody @Valid Application application) {
+    @PostMapping("job-listings/{jobListingId}/create")
+    public ResponseEntity<String> insertApplication(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @PathVariable(value = "jobListingId") int jobListingId, @RequestBody @Valid Application application) {
 
-        User user = this.userService.findById(userId);
+        User user = userService.findByJwtToken(authHeader);
         JobListing job = this.jobListingService.getJobListingById(jobListingId);
         application.setApplicant(user);
         application.setJobListing(job);
