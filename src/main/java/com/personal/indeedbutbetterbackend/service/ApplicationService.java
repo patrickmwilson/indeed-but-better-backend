@@ -27,9 +27,12 @@ public class ApplicationService {
         applicationDao.save(application);
     }
 
-    public List<Application> getApplicationsByUserId(int userId) { return this.applicationDao.findApplicationsByApplicantUserId(userId); }
+    public Page<Application> getApplicationsByUser(int page, int userId) { return this.applicationDao.findApplicationsByApplicantUserId(userId, PageRequest.of(page, 5)); }
 
     public Page<Application> getApplicationsByJobListingId(int jobListingId, int page) { return  this.applicationDao.findApplicationsByJobListingJobListingId(jobListingId, PageRequest.of(page, 5)); }
 
     public Page<Application> searchByJobListingId(String query, int page, int jobListingId) {return this.applicationDao.findApplicationsByApplicant_FirstNameContainsOrApplicant_LastNameContainsAndJobListing_JobListingIdAllIgnoreCase(query, query, jobListingId, PageRequest.of(page, 5));}
+
+    public Page<Application> searchByUser(String query, int page, int userId) {return this.applicationDao.findApplicationsByApplicant_FirstNameContainsOrApplicant_LastNameContainsAndApplicant_UserIdAllIgnoreCase(query, query, userId, PageRequest.of(page, 5));}
+
 }

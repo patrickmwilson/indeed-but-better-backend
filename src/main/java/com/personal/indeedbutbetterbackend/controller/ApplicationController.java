@@ -57,15 +57,23 @@ public class ApplicationController {
         return new ResponseEntity<>(applicationPage, HttpStatus.OK);
     }
 
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<List<Application>> getApplicationsByUserId(@PathVariable(value = "userId") int userId) {
-        List<Application> applications = applicationService.getApplicationsByUserId(userId);
+    @GetMapping("/page/{page}/user")
+    public ResponseEntity<Page<Application>> getApplicationsByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @PathVariable(value = "page") int page) {
+        User user = userService.findByJwtToken(authHeader);
+        Page<Application> applications = applicationService.getApplicationsByUser(page, user.getUserId());
 
         return new ResponseEntity<>(applications, HttpStatus.OK);
     }
     @GetMapping("/job-listings/{jobListingId}/search/{query}/page/{page}")
     public ResponseEntity<Page<Application>> searchByJobListingId(@PathVariable(value = "query") String query, @PathVariable(value = "page") int page, @PathVariable(value = "jobListingId") int jobListingId) {
         Page<Application> applicationPage = applicationService.searchByJobListingId(query, page, jobListingId);
+        return new ResponseEntity<>(applicationPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{query}/page/{page}")
+    public ResponseEntity<Page<Application>> searchByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @PathVariable(value = "query") String query, @PathVariable(value = "page") int page) {
+        User user = userService.findByJwtToken(authHeader);
+        Page<Application> applicationPage = applicationService.searchByUser(query, page, user.getUserId());
         return new ResponseEntity<>(applicationPage, HttpStatus.OK);
     }
 
