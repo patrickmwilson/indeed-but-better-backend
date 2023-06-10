@@ -14,6 +14,5 @@ public interface ApplicationDao extends JpaRepository<Application, Integer> {
 
     Page<Application> findApplicationsByApplicant_FirstNameContainsOrApplicant_LastNameContainsAndJobListing_JobListingIdAllIgnoreCase(String fname, String lname, int jobListingId, PageRequest pageable);
 
-    Page<Application> findApplicationsByApplicant_FirstNameContainsOrApplicant_LastNameContainsAndApplicant_UserIdAllIgnoreCase(String fname, String lname, int userId, PageRequest pageable);
-
+    Page<Application> findApplicationsByJobListing_Company_NameContainsOrJobListing_JobTitleContainsAndApplicant_UserIdAllIgnoreCase(String cName, String title, int userId, PageRequest pageable);
 }

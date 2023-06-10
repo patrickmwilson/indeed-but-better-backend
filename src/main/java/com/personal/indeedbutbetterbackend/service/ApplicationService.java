@@ -33,6 +33,6 @@ public class ApplicationService {
 
     public Page<Application> searchByJobListingId(String query, int page, int jobListingId) {return this.applicationDao.findApplicationsByApplicant_FirstNameContainsOrApplicant_LastNameContainsAndJobListing_JobListingIdAllIgnoreCase(query, query, jobListingId, PageRequest.of(page, 5));}
 
-    public Page<Application> searchByUser(String query, int page, int userId) {return this.applicationDao.findApplicationsByApplicant_FirstNameContainsOrApplicant_LastNameContainsAndApplicant_UserIdAllIgnoreCase(query, query, userId, PageRequest.of(page, 5));}
+    public Page<Application> searchByUser(String query, int page, int userId) {return this.applicationDao.findApplicationsByJobListing_Company_NameContainsOrJobListing_JobTitleContainsAndApplicant_UserIdAllIgnoreCase(query, query, userId, PageRequest.of(page, 5));}
 
 }
