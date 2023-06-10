@@ -1,6 +1,8 @@
 package com.personal.indeedbutbetterbackend.service;
 
+import com.personal.indeedbutbetterbackend.entity.Address;
 import com.personal.indeedbutbetterbackend.entity.Company;
+import com.personal.indeedbutbetterbackend.repository.AddressDao;
 import com.personal.indeedbutbetterbackend.repository.CompanyDao;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -17,11 +19,17 @@ public class CompanyService {
     @Autowired
     public CompanyDao companyDao;
 
+    @Autowired
+    public AddressDao addressDao;
+
     public List<Company> getAll(){
         return this.companyDao.findAll();
     }
 
     public void insert(Company company) {
+
+        Address savedEntity = addressDao.save(company.getAddress());
+        company.setAddress(savedEntity);
         companyDao.save(company);
     }
 

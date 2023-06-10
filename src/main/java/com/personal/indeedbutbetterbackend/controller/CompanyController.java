@@ -24,16 +24,6 @@ public class CompanyController {
     @GetMapping("/all")
     public ResponseEntity<List<Company>> getAll() {
         List<Company> companyList = companyService.getAll();
-        companyList.add(new Company(1, "Company 1", "500-100", "Finance", "USA"));
-        companyList.add(new Company(2, "Company 2", "500-100","Finance", "USA"));
-        companyList.add(new Company(3, "Company 3", "500-100","Finance", "USA"));
-        companyList.add(new Company(4, "Company 4", "500-100","Finance", "USA"));
-        companyList.add(new Company(5, "Company 5", "500-100","Finance", "USA"));
-        companyList.add(new Company(6, "Company 6", "500-100","Finance", "USA"));
-        companyList.add(new Company(7, "Company 7", "500-100","Finance", "USA"));
-        companyList.add(new Company(8, "Company 8", "500-100","Finance", "USA"));
-
-
         return new ResponseEntity<>(companyList, HttpStatus.OK);
     }
 

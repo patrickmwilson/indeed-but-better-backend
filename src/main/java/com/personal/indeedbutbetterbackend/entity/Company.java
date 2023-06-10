@@ -2,6 +2,8 @@ package com.personal.indeedbutbetterbackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -27,6 +29,8 @@ public class Company {
     @Column(name="industry")
     private String industry;
 
-    @Column(name="location", nullable = false)
-    private String location;
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "address_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Address address;
 }
