@@ -16,6 +16,5 @@ public class JobListingValidator implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "jobTitle", "jobTitle.empty", "jobTitle must have a value");
         ValidationUtils.rejectIfEmpty(errors, "description", "description.empty", "description must have a value");
         ValidationUtils.rejectIfEmpty(errors, "salary", "salary.empty", "salary must have a value");
-        ValidationUtils.rejectIfEmpty(errors, "location", "location.empty", "location must have a value");
     }
 }
