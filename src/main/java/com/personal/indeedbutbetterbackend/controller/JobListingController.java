@@ -1,7 +1,6 @@
 package com.personal.indeedbutbetterbackend.controller;
 
 import com.personal.indeedbutbetterbackend.entity.JobListing;
-import com.personal.indeedbutbetterbackend.service.CompanyService;
 import com.personal.indeedbutbetterbackend.service.JobListingService;
 import com.personal.indeedbutbetterbackend.service.UserService;
 import com.personal.indeedbutbetterbackend.validator.JobListingValidator;
@@ -65,4 +64,16 @@ public class JobListingController {
         List<JobListing> jobListingList = jobListingService.getJobListingsByUserId(userId);
         return new ResponseEntity<>(jobListingList, HttpStatus.OK);
     }
+    @GetMapping("/page/{page}")
+    public ResponseEntity<Page<JobListing>> getPage(@PathVariable(value = "page") int page) {
+        Page<JobListing> jobPage = jobListingService.getAll(page);
+        return new ResponseEntity<>(jobPage, HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{query}/page/{page}")
+    public ResponseEntity<Page<JobListing>> search(@PathVariable(value = "query") String query, @PathVariable(value = "page") int page) {
+        Page<JobListing> jobPage = jobListingService.search(query, page);
+        return new ResponseEntity<>(jobPage, HttpStatus.OK);
+    }
+
 }

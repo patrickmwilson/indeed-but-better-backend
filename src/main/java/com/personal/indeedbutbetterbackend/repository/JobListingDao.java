@@ -12,4 +12,6 @@ public interface JobListingDao extends JpaRepository<JobListing, Integer> {
     Page<JobListing> findJobListingsByCompanyId(int companyId, PageRequest pageable);
     JobListing findJobListingByJobListingId(int id);
     List<JobListing> findJobListingsByUserUserId(int userId);
+
+    Page<JobListing> findJobListingsByJobTitleContainsOrDescriptionContainsOrCompany_NameContainsOrCompany_Address_CityContainsOrCompany_Address_StateContainsAllIgnoreCase(String title, String description, String companyName, String city, String state, PageRequest pageable);
 }
