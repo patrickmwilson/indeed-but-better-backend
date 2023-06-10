@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,6 +36,17 @@ public class CompanyService {
 
     public Company findByCompanyId(int id) {
         return this.companyDao.findById(id);
+    }
+
+    public List<Company> search(String query){
+       var results = new ArrayList<Company>();
+
+        results.addAll(companyDao.findCompanyByNameContainsIgnoreCase(query));
+        results.addAll(companyDao.findCompanyByIndustryContainsIgnoreCase(query));
+        results.addAll(companyDao.findCompanyByAddress_CityContainsIgnoreCase(query));
+        results.addAll(companyDao.findCompanyByAddress_StateContainsIgnoreCase(query));
+
+        return results;
     }
 
 }

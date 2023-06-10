@@ -32,4 +32,10 @@ public class CompanyController {
         companyService.insert(company);
         return new ResponseEntity<>("Resource created", HttpStatus.CREATED);
     }
+
+    @GetMapping("/search/{query}")
+    public ResponseEntity<List<Company>> search(@PathVariable(value = "query") String query) {
+        List<Company> companyList = companyService.search(query);
+        return new ResponseEntity<>(companyList, HttpStatus.OK);
+    }
 }
