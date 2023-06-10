@@ -41,10 +41,10 @@ public class CompanyService {
 
     public Page<Company> search(String query, int page){
 
-        return companyDao.findCompanyByNameContainsOrIndustryContainsOrAddress_CityContainsOrAddress_StateContainsAllIgnoreCase(query, query, query, query, PageRequest.of(page, 10));
+        return companyDao.findCompanyByNameContainsOrIndustryContainsOrAddress_CityContainsOrAddress_StateContainsAllIgnoreCase(query, query, query, query, PageRequest.of(page, 5));
 
     }
 
-    public Page<Company> getAll(int page) {return this.companyDao.findAll(PageRequest.of(page, 10));}
+    public Page<Company> getAll(int page) {return this.companyDao.findAll(PageRequest.of(page, 5));}
 
 }

@@ -5,6 +5,8 @@ import com.personal.indeedbutbetterbackend.repository.JobListingDao;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class JobListingService {
         jobListingDao.save(jobListing);
     }
 
-    public List<JobListing> getJobListingsByCompanyId(int companyId) { return this.jobListingDao.findJobListingsByCompanyId(companyId); }
+    public Page<JobListing> getJobListingsByCompanyId(int companyId, int page) { return this.jobListingDao.findJobListingsByCompanyId(companyId, PageRequest.of(page, 5)); }
     public List<JobListing> getJobListingsByUserId(int userId) { return this.jobListingDao.findJobListingsByUserUserId(userId); }
 
 }

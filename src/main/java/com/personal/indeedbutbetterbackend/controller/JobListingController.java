@@ -10,6 +10,7 @@ import com.personal.indeedbutbetterbackend.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -67,21 +68,10 @@ public class JobListingController {
         return new ResponseEntity<>("Resource created", HttpStatus.CREATED);
     }
 
-    @GetMapping("/companies/{companyId}")
-    public ResponseEntity<List<JobListing>> getJobListingsByCompanyId(@PathVariable(value = "companyId") int companyId) {
-        List<JobListing> jobListingList = jobListingService.getJobListingsByCompanyId(companyId);
-        User user = new User();
-        Company company = new Company();
-        jobListingList.add(new JobListing(1, "Test 1", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 50000, "USA", user, company));
-        jobListingList.add(new JobListing(2, "Test 2", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-        jobListingList.add(new JobListing(3, "Test 3", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-        jobListingList.add(new JobListing(4, "Test 4", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-        jobListingList.add(new JobListing(5, "Test 5", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-        jobListingList.add(new JobListing(6, "Test 6", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-        jobListingList.add(new JobListing(7, "Test 7", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-        jobListingList.add(new JobListing(8, "Test 8", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione", 500000, "USA", user, company));
-
-        return new ResponseEntity<>(jobListingList, HttpStatus.OK);
+    @GetMapping("/companies/{companyId}/page/{page}")
+    public ResponseEntity<Page<JobListing>> getJobListingsByCompanyId(@PathVariable(value = "companyId") int companyId, @PathVariable(value = "page") int page) {
+        Page<JobListing> jobListingPage = jobListingService.getJobListingsByCompanyId(companyId, page);
+        return new ResponseEntity<>(jobListingPage, HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}")
