@@ -24,6 +24,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/actuator/**").permitAll();
                     auth.requestMatchers("/users/login-with-google").permitAll();
                     auth.anyRequest().permitAll();
                     //auth.anyRequest().authenticated();
