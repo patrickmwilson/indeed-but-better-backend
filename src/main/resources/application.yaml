@@ -1,7 +1,5 @@
-# yaml (Yaml Ain't Markup Language')
 server:
   port: 9025
-
 management:
   endpoints:
     web:
@@ -10,18 +8,16 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-
 spring:
   datasource:
-    #url: jdbc:mariadb://Ibbinstance.cjraovccfifn.us-west-1.rds.amazonaws.com:3306/ibbdb
-    #username: ibbuser
-    #password: password
-    #driver-class-name: org.mariadb.jdbc.Driver
-    #url: jdbc:h2:mem:mydb
     url: jdbc:h2:file:~/spring-boot-h2-db
     username: sa
     password: password
     driverClassName: org.h2.Driver
+  data:
+    jdbc:
+      repositories:
+        enabled: false
   h2:
     console:
       enabled: true
@@ -42,11 +38,9 @@ spring:
               - email
               - profile
   jpa:
-    #database-platform: org.hibernate.dialect.MySQL8Dialect
     database-platform: org.hibernate.dialect.H2Dialect
     show-sql: false
     hibernate:
-      #ddl-auto: create-drop
       ddl-auto: update
   mail:
     host: smtp.gmail.com
