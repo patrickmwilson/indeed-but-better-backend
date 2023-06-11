@@ -40,4 +40,10 @@ public class WorkExperienceController {
         workExperienceService.saveToUser(workExperience, user);
         return new ResponseEntity<>("Work experience added", HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteWorkExperience(@PathVariable("id") Integer workExperienceId) {
+        workExperienceService.deleteById(workExperienceId);
+        return new ResponseEntity<>("Work experience deleted", HttpStatus.OK);
+    }
 }

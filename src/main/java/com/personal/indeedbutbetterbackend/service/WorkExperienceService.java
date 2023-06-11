@@ -26,4 +26,8 @@ public class WorkExperienceService {
         workExperience.setUser(user);
         workExperienceDao.save(workExperience);
     }
+
+    public void deleteById(Integer workExperienceId) {
+        workExperienceDao.deleteById(workExperienceId);
+    }
 }
