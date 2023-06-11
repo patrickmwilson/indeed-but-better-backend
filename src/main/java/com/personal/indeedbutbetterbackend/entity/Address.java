@@ -17,7 +17,7 @@ public class Address {
     @Column(name="address_id")
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private int addressId;
+    private int id;
 
     @Column(name="street_address",nullable=false)
     private String streetAddress;
@@ -30,6 +30,5 @@ public class Address {
 
     @Column(name="zip_code",nullable=false)
     private int zipCode;
-
 
 }
