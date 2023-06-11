@@ -17,7 +17,7 @@ spring:
     username: ${PROD_DB_USERNAME}
     password: ${PROD_DB_PASSWORD}
     driverClassName: com.mysql.jdbc.Driver
-    name: indeed-but-better
+    name: railway
   security:
     jwt:
       secret: 5v8y/B?E(H+KbPeShVmYq3t6w9z$C&F)
