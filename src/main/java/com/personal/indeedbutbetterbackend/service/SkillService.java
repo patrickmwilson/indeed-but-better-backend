@@ -22,6 +22,20 @@ public class SkillService {
         return skillDao.findByUser(user);
     }
 
+    public void deleteSkill(Skill skill) {
+        skillDao.deleteById(skill.getSkillId());
+    }
+
+    public void updateByUser(List<Skill> skillList, User user) {
+        List<Skill> oldList = this.findByUser(user);
+        for(Skill skill: oldList) {
+            this.deleteSkill(skill);
+        }
+        for(Skill skill: skillList) {
+            this.saveToUser(skill,user);
+        }
+    }
+
     public void saveToUser(Skill skill, User user) {
         skill.setUser(user);
         skillDao.save(skill);

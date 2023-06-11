@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -39,5 +40,15 @@ public class SkillController {
         User user = userService.findByJwtToken(authHeader);
         skillService.saveToUser(skill, user);
         return new ResponseEntity<>("Skill added", HttpStatus.OK);
+    }
+
+    @PostMapping("/update-by-user")
+    public ResponseEntity<String> updateSkills(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @RequestBody List<Skill> skills) {
+        User user = userService.findByJwtToken(authHeader);
+        for(Skill skill:skills) {
+            System.out.println(skill);
+        }
+        skillService.updateByUser(skills, user);
+        return new ResponseEntity<>("Skills updated", HttpStatus.OK);
     }
 }

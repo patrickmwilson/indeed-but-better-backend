@@ -21,7 +21,7 @@ public class Skill {
     @Setter(AccessLevel.NONE)
     private int skillId;
 
-    @Column(name="skill_name")
+    @Column(name="skill_name",unique = true,nullable = false)
     private String skillName;
 
     @ManyToOne(fetch=FetchType.EAGER)
@@ -35,4 +35,16 @@ public class Skill {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private JobListing jobListing;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Skill)) {
+            return false;
+        }
+        Skill s = (Skill) o;
+        return this.skillName.equals(s.getSkillName());
+    }
 }
