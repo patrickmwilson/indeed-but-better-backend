@@ -27,10 +27,12 @@ public class EducationController {
     @Autowired
     private UserService userService;
 
+    //TODO: Complete this reordering client side, something to do with the way ngFor detects changes not triggering
     @GetMapping("/find-by-user")
     public ResponseEntity<List<Education>> findByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
         User user = userService.findByJwtToken(authHeader);
         List<Education> educationList = educationService.findByUser(user);
+        educationList.sort((o1, o2) -> o1.getSortIndex().compareTo(o2.getSortIndex()));
         return new ResponseEntity<>(educationList, HttpStatus.OK);
     }
 
@@ -45,5 +47,13 @@ public class EducationController {
     public ResponseEntity<String> deleteEducation(@PathVariable("id") Integer educationId) {
         educationService.deleteById(educationId);
         return new ResponseEntity<>("Education deleted", HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateEducation(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @RequestBody Education education) {
+        User user = userService.findByJwtToken(authHeader);
+        educationService.saveToUser(education, user);
+        System.out.println(education.getSortIndex());
+        return new ResponseEntity<>("Education updated", HttpStatus.OK);
     }
 }

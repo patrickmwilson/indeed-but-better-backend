@@ -18,6 +18,10 @@ public class EducationService {
     @Autowired
     private EducationDao educationDao;
 
+    public void update(Education education) {
+        educationDao.save(education);
+    }
+
     public List<Education> findByUser(User user) {
         return educationDao.findByUser(user);
     }
