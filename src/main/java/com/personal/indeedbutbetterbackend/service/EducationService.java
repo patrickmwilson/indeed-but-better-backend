@@ -26,4 +26,8 @@ public class EducationService {
         education.setUser(user);
         educationDao.save(education);
     }
+
+    public void deleteById(Integer educationId) {
+        educationDao.deleteById(educationId);
+    }
 }
