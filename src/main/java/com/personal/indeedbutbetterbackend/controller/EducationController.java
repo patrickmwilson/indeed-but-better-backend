@@ -40,4 +40,10 @@ public class EducationController {
         educationService.saveToUser(education, user);
         return new ResponseEntity<>("Education added", HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteEducation(@PathVariable("id") Integer educationId) {
+        educationService.deleteById(educationId);
+        return new ResponseEntity<>("Education deleted", HttpStatus.OK);
+    }
 }
