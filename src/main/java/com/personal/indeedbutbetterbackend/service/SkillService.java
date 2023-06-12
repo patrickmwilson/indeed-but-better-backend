@@ -26,6 +26,10 @@ public class SkillService {
         skillDao.deleteById(skill.getSkillId());
     }
 
+    public void deleteById(Integer skillId) {
+        skillDao.deleteById(skillId);
+    }
+
     public void updateByUser(List<Skill> skillList, User user) {
         List<Skill> oldList = this.findByUser(user);
         for(Skill skill: oldList) {

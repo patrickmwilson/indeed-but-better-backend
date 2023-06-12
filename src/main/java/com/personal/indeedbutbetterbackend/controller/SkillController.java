@@ -51,4 +51,10 @@ public class SkillController {
         skillService.updateByUser(skills, user);
         return new ResponseEntity<>("Skills updated", HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteSkill(@PathVariable("id") Integer skillId) {
+        skillService.deleteById(skillId);
+        return new ResponseEntity<>("Skill deleted", HttpStatus.OK);
+    }
 }
