@@ -27,14 +27,6 @@ public class WorkExperience {
     @Column(name="company_name",nullable=false)
     private String companyName;
 
-    /*@Column(name="start_date",nullable=false)
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date startDate;
-
-    @Column(name="end_date")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date endDate;*/
-
     @Column(name="start_date",nullable=false)
     private String startDate;
 
@@ -46,6 +38,9 @@ public class WorkExperience {
 
     @Column(name="location")
     private String location;
+
+    @Column(name="sort_index")
+    private Integer sortIndex;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")

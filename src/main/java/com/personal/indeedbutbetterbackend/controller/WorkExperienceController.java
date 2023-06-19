@@ -31,6 +31,7 @@ public class WorkExperienceController {
     public ResponseEntity<List<WorkExperience>> findByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
         User user = userService.findByJwtToken(authHeader);
         List<WorkExperience> workExperienceList = workExperienceService.findByUser(user);
+        workExperienceList.sort((o1, o2) -> o1.getSortIndex().compareTo(o2.getSortIndex()));
         return new ResponseEntity<>(workExperienceList, HttpStatus.OK);
     }
 
@@ -45,5 +46,12 @@ public class WorkExperienceController {
     public ResponseEntity<String> deleteWorkExperience(@PathVariable("id") Integer workExperienceId) {
         workExperienceService.deleteById(workExperienceId);
         return new ResponseEntity<>("Work experience deleted", HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateWorkExperience(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @RequestBody WorkExperience workExperience){
+        User user = userService.findByJwtToken(authHeader);
+        workExperienceService.saveToUser(workExperience, user);
+        return new ResponseEntity<>("Work experience updated", HttpStatus.OK);
     }
 }

@@ -53,7 +53,6 @@ public class EducationController {
     public ResponseEntity<String> updateEducation(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @RequestBody Education education) {
         User user = userService.findByJwtToken(authHeader);
         educationService.saveToUser(education, user);
-        System.out.println(education.getSortIndex());
         return new ResponseEntity<>("Education updated", HttpStatus.OK);
     }
 }
