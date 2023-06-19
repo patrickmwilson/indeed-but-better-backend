@@ -43,6 +43,15 @@ public class User implements UserDetails {
     @Column(name="user_picture")
     private String userPicture;
 
+    @Column(name="user_title")
+    private String userTitle;
+
+    @Column(name="user_description")
+    private String userDescription;
+
+    @Column(name="user_location")
+    private String userLocation;
+
     private String jwt;
 
     public User(String email, String name, String firstName, String lastName, String userPicture) {

@@ -46,18 +46,7 @@ public class UserService {
     }
 
     public void update(User user) {
-        User oldUserRecord = findByEmail(user.getEmail());
-        oldUserRecord.setName(user.getName());
-        oldUserRecord.setFirstName(user.getFirstName());
-        oldUserRecord.setLastName(user.getLastName());
-        oldUserRecord.setUserPicture(user.getUserPicture());
-        oldUserRecord.setPhoneNumber(user.getPhoneNumber());
-        oldUserRecord.setUserType(user.getUserType());
-
-        System.out.println("In user service update");
-        System.out.println(oldUserRecord.toString());
-
-        userDao.save(oldUserRecord);
+        userDao.save(user);
     }
 
     public User findByEmail(String email) {
