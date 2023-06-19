@@ -21,7 +21,7 @@ public class Skill {
     @Setter(AccessLevel.NONE)
     private int skillId;
 
-    @Column(name="skill_name",unique = true,nullable = false)
+    @Column(name="skill_name",nullable = false)
     private String skillName;
 
     @ManyToOne(fetch=FetchType.EAGER)
