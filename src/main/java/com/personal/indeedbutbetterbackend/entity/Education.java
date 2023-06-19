@@ -36,6 +36,9 @@ public class Education {
     @Column(name="description")
     private String description;
 
+    @Column(name="sort_index")
+    private Integer sortIndex;
+
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
