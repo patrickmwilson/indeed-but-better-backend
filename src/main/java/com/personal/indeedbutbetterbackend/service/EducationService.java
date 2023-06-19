@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class EducationService {
 
-    @Autowired
     private EducationDao educationDao;
 
     public void update(Education education) {

@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class SkillService {
 
-    @Autowired
     private SkillDao skillDao;
 
     public List<Skill> findByUser(User user) {

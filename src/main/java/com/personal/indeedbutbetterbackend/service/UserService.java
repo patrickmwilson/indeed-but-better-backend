@@ -17,10 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserDao userDao;
-
-    @Autowired
     private JwtTokenUtil jwtUtil;
 
     public User validateUserSignInWithGoogle(String idToken) {
