@@ -31,6 +31,7 @@ public class SkillController {
     public ResponseEntity<List<Skill>> findByUser(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader) {
        User user = userService.findByJwtToken(authHeader);
        List<Skill> skillList = skillService.findByUser(user);
+       skillList.sort((o1, o2) -> o1.getSortIndex().compareTo(o2.getSortIndex()));
        return new ResponseEntity<>(skillList, HttpStatus.OK);
     }
 
@@ -55,5 +56,12 @@ public class SkillController {
     public ResponseEntity<String> deleteSkill(@PathVariable("id") Integer skillId) {
         skillService.deleteById(skillId);
         return new ResponseEntity<>("Skill deleted", HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<String> updateSkill(@RequestHeader(HttpHeaders.AUTHORIZATION) String authHeader, @RequestBody Skill skill) {
+        User user = userService.findByJwtToken(authHeader);
+        skillService.saveToUser(skill, user);
+        return new ResponseEntity<>("Skill updated", HttpStatus.OK);
     }
 }
