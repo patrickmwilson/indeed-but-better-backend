@@ -24,6 +24,9 @@ public class Skill {
     @Column(name="skill_name",nullable = false)
     private String skillName;
 
+    @Column(name="sort_index")
+    private Integer sortIndex;
+
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
