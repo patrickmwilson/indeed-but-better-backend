@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 public class WorkExperienceService {
 
-    @Autowired
     private WorkExperienceDao workExperienceDao;
 
     public List<WorkExperience> findByUser(User user) {

@@ -23,7 +23,6 @@ import java.util.*;
 public class UserController {
 
     private UserService userService;
-
     private JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("/login-with-google")

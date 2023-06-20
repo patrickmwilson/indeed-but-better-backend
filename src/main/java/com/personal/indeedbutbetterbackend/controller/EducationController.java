@@ -21,10 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class EducationController {
 
-    @Autowired
     private EducationService educationService;
-
-    @Autowired
     private UserService userService;
 
     //TODO: Complete this reordering client side, something to do with the way ngFor detects changes not triggering

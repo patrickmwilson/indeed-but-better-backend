@@ -21,10 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SkillController {
 
-    @Autowired
     private SkillService skillService;
-
-    @Autowired
     private UserService userService;
 
     @GetMapping("/find-by-user")

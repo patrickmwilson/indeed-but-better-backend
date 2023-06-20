@@ -21,10 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class WorkExperienceController {
 
-    @Autowired
     private WorkExperienceService workExperienceService;
-
-    @Autowired
     private UserService userService;
 
     @GetMapping("/find-by-user")
